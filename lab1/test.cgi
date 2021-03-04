@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 import psycopg2
 
-IST_ID = 'istXXXXXX'
+IST_ID = 'ist193610'
 host = 'db.tecnico.ulisboa.pt'
 port = 5432
-password = 'mypassXXXXXX'
+password = '196RISR0'
 db_name = IST_ID
 
 print('Content-type:text/html\n\n')
