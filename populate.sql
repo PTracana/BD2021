@@ -107,6 +107,7 @@ INSERT INTO supplier(nif, s_name) VALUES (5846215, 'Stephanie');
 INSERT INTO supplier(nif, s_name) VALUES (57487120, 'Alexander');
 INSERT INTO supplier(nif, s_name) VALUES (45648186, 'Paul');
 INSERT INTO supplier(nif, s_name) VALUES (31367208,'Richard');
+INSERT INTO supplier(nif, s_name) VALUES(1234612, 'Jane');
 
 -- Populating prim supplier
 INSERT INTO supplies_prim(nif, ean, dia) VALUES (954861,7842651395888,'12-05-2022');
@@ -123,6 +124,7 @@ INSERT INTO supplies_sec(nif, ean) VALUES (31367208,9125436740551);
 INSERT INTO supplies_sec(nif, ean) VALUES (31367208,1024356875915);
 INSERT INTO supplies_sec(nif, ean) VALUES (5846215,7842651395888);
 INSERT INTO supplies_sec(nif, ean) VALUES (57487120,1024356875915);
-
+INSERT INTO supplies_sec(nif, ean) VALUES (57487120,7842651395888);
+INSERT INTO supplies_sec(nif, ean) VALUES (1234612,7842651395888);
 
 
