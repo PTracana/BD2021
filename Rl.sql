@@ -1,6 +1,7 @@
-CREATE OR REPLACE FUNCTION supplier_sec_verify_proc(ean_g numeric(13))
-    RETURNS TRIGGER AS
-    $$
+DROP TRIGGER IF EXISTS supplier_sec_verify on supplies_sec ;
+
+CREATE OR REPLACE FUNCTION supplier_sec_verify_proc()
+    RETURNS TRIGGER AS $$
         DECLARE counter INTEGER;
     BEGIN
         SELECT count(*) from supplies_sec as a WHERE a.ean = ean_g into counter;
@@ -16,3 +17,4 @@ CREATE OR REPLACE FUNCTION supplier_sec_verify_proc(ean_g numeric(13))
 CREATE TRIGGER supplier_sec_verify
     BEFORE UPDATE OR INSERT on supplies_sec
     EXECUTE PROCEDURE supplier_sec_verify_proc();
+
