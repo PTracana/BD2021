@@ -125,6 +125,8 @@ INSERT INTO supplies_sec(nif, ean) VALUES (31367208,1024356875915);
 INSERT INTO supplies_sec(nif, ean) VALUES (5846215,7842651395888);
 INSERT INTO supplies_sec(nif, ean) VALUES (57487120,1024356875915);
 INSERT INTO supplies_sec(nif, ean) VALUES (57487120,7842651395888);
+
+-- this last query should activate a trigger but it doesnt
 INSERT INTO supplies_sec(nif, ean) VALUES (1234612,7842651395888);
 
 
