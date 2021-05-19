@@ -2,10 +2,14 @@ DROP TRIGGER IF EXISTS supplier_sec_verify on supplies_sec ;
 
 CREATE OR REPLACE FUNCTION supplier_sec_verify_proc()
     RETURNS TRIGGER AS $$
+    DECLARE counter INTEGER;
     BEGIN
-    IF ((SELECT count(*) from supplies_sec as a WHERE new.ean = a.ean) >= 3) THEN
-        RAISE EXCEPTION 'limite de suppliers para produto %', new.ean;
-    END IF;
+        SELECT count(ean) into counter
+            from supplies_sec as a
+            WHERE new.ean = a.ean;
+        IF (counter >= 3) THEN
+            RAISE EXCEPTION 'limite de suppliers para produto %', new.ean;
+        END IF;
     RETURN new;
     END
     $$ LANGUAGE plpgsql;
