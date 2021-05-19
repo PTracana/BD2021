@@ -124,7 +124,7 @@ CREATE TABLE simplecategory (
 
     name VARCHAR(80) ,
     PRIMARY KEY(name),
-    FOREIGN KEY(name) REFERENCES Category(name)
+    FOREIGN KEY(name) REFERENCES Category(name) ON DELETE CASCADE
 
 );
 
@@ -132,7 +132,7 @@ CREATE TABLE supercategory(
 
     name VARCHAR(80) ,
     PRIMARY KEY(name),
-    FOREIGN KEY(name) REFERENCES Category(name)
+    FOREIGN KEY(name) REFERENCES Category(name) ON DELETE CASCADE
 
     -- Every superCategory must be present in the consists:of table
 
