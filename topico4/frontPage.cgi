@@ -10,10 +10,10 @@ print('<body>')
 
 # Displaying results
 print('<table border="2" cellspacing="1">')
-print('<tr><td>Options</td></tr>')
+print('<tr><td><b>Options</b></td></tr>')
 
 result = [("Insert/Remove categories and sub-categories","categories.cgi"),\
-("Insert/Remove a new product and its respective suppliers",""),\
+("Insert/Remove a new product and its respective suppliers","newProduct.cgi"),\
 ("List replenishment events","replenishEvent.cgi"),\
 ("Change designation of a product","products.cgi"),\
 ("List all the sub-categories of a super-category","listSubcategories.cgi")]

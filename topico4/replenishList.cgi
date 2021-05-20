@@ -18,6 +18,9 @@ try:
     #To prevent running the query with null values
     if (ean is None):
         raise Exception("No params read")
+              
+    if(int(ean)<0):
+        raise Exception("Invalid ean")
 
 
     connection = psycopg2.connect(login.credentials)
@@ -26,7 +29,7 @@ try:
 
     sql = 'SELECT * FROM replenishevent WHERE ean = %(ean)s;'
 
-    data = {'ean': ean}
+    data = {'ean': int(ean)}
 
     cursor.execute(sql, data)
     result = cursor.fetchall()
@@ -37,7 +40,7 @@ try:
 
     # Displaying results
     print('<table border="3" cellspacing="7">')
-    print('<tr><td>unitsRep</td><td>instant</td><td>side</td><td>height</td><td>nr</td><td>NIF</td><td>ean</td></tr>')
+    print('<tr><td><b>UnitsRep</b></td><td><b>Instant</b></td><td><b>Side</b></td><td><b>Height</b></td><td><b>Nr</b></td><td><b>NIF</b></td><td><b>Ean</b></td></tr>')
     for row in result:
         print('<tr>')
         print('<td>', row[0], '</td><td>', row[1], '</td><td>', row[2], '</td><td>', row[3], '</td><td>', row[4], '</td><td>', row[5], '</td><td>', row[6], '</td>')

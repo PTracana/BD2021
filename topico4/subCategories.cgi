@@ -18,7 +18,7 @@ try:
     #To prevent running the query with null values
     if (name is None):
         raise Exception("No params read")
-
+  
 
     connection = psycopg2.connect(login.credentials)
     cursor = connection.cursor()
@@ -37,7 +37,7 @@ try:
 
     # Displaying results
     print('<table border="3" cellspacing="1">')
-    print('<tr><td>name</td></tr>')
+    print('<tr><td><b>Name</b></td></tr>')
     for row in result:
         print('<tr>')
         print('<td>', row[0],'</td>')

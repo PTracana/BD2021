@@ -24,7 +24,7 @@ try:
 
     # Displaying results
     print('<table border="5" cellspacing="5">')
-    print('<tr><td>ean</td><td>descr</td><td>name</td></tr>')
+    print('<tr><td><b>Ean</b></td><td><b>Descr</b></td><td><b>Name</b></td></tr>')
     for row in result:
         print('<tr>')
         print('<td>', row[0], '</td><td>', row[1], '</td><td>', row[2], '</td>')

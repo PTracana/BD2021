@@ -1,12 +1,10 @@
 #!/usr/bin/python3
-import psycopg2
 import cgi
+import psycopg2
 import login
 
 form = cgi.FieldStorage()
-
 ean = form.getvalue('ean')
-descr = form.getvalue('descr')
 
 print('Content-type:text/html\n\n')
 print('<html>')
@@ -17,22 +15,19 @@ print('<body>')
 
 connection = None
 try:
-    #To prevent running the query with null values
-    if (descr is None) or (ean is None):
-        raise Exception("No params read")
-
-          
+    if(ean is None):
+        raise Exception("Invalid ean")
     if(int(ean)<0):
         raise Exception("Invalid ean")
 
+        
     connection = psycopg2.connect(login.credentials)
     cursor = connection.cursor()
 
-    sql = 'UPDATE product SET descr = %(descr)s WHERE ean = %(ean)s;'
+    sql = 'DELETE FROM product WHERE ean = %(ean)s'
 
-    data = {'descr': descr, 'ean': int(ean)}
+    data = {'ean': int(ean)}
 
-    
 
     cursor.execute(sql, data)
     connection.commit()
@@ -50,6 +45,7 @@ finally:
     if connection is not None:
         connection.close()
 
-print('<p><a href="products.cgi">Return to Products</a></p>')
+print('<p><a href="newProduct.cgi">Return to Categories</a></p>')
+
 print('</body>')
 print('</html>')

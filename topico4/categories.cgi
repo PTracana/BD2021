@@ -29,7 +29,7 @@ try:
 
     # Displaying results
     print('<table border="1" cellspacing="2">')
-    print('<tr><td>name</td><td>Action</td></tr>')
+    print('<tr><td><b>Name</b></td><td><b>Action</b></td></tr>')
     for row in result:
         print('<tr>')
         print('<td>{}</td><td><a href="categoryDelete.cgi?name={}">Delete category</a></td>'.format(row[0],row[0]))

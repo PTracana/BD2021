@@ -24,7 +24,7 @@ try:
 
 	# Displaying results
 	print('<table border="3" cellspacing="3">')
-	print('<tr><td>name</td><td></td></tr>')
+	print('<tr><td><b>Name</b></td><td><b>Action</b></td></tr>')
 	for row in result:
 		print('<tr>')
 		print('<td>', row[0],'</td><td>', '<a href="subCategories.cgi?name={}">List sub-categories</a>'.format(row[0]),'</td>')
