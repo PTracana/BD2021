@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-import psycopg2
 import cgi
+import psycopg2
 import login
 
 form = cgi.FieldStorage()
-
-ean = form.getvalue('ean')
-descr= form.getvalue('descr')
+name = form.getvalue('name')
+typeCat = form.getvalue('typeCat')
+typeCatList = ["simplecategory","supercategory"]
 
 print('Content-type:text/html\n\n')
 print('<html>')
@@ -18,17 +18,24 @@ print('<body>')
 connection = None
 try:
     #To prevent running the query with null values
-    if (descr is None) or (ean is None):
+    if (name is None) or (typeCat is None):
         raise Exception("No params read")
+
+    typeCatInt = int(typeCat)
+    if (typeCatInt<0) or (typeCatInt>1):
+        raise Exception("Something is wrong")
+
+    if(name.isspace()):
+        raise Exception("Not valid name")
+
 
     connection = psycopg2.connect(login.credentials)
     cursor = connection.cursor()
 
-    sql = 'UPDATE product SET descr = %(descr)s WHERE ean = %(ean)s;'
 
-    data = {'descr': descr, 'ean': ean}
+    sql = 'INSERT INTO category(name) VALUES (%(name)s); INSERT INTO {}(name) VALUES (%(name)s);'.format(typeCatList[typeCatInt])
 
-    
+    data = {'name': name}
 
     cursor.execute(sql, data)
     connection.commit()
@@ -46,6 +53,7 @@ finally:
     if connection is not None:
         connection.close()
 
-print('<p><a href="products.cgi">Return to Products</a></p>')
+print('<p><a href="categories.cgi">Return to Categories</a></p>')
+
 print('</body>')
 print('</html>')

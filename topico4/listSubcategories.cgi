@@ -17,17 +17,17 @@ try:
 	cursor = connection.cursor()
 
 	# Making query
-	sql = 'SELECT ean, descr, name FROM product;'
+	sql = 'SELECT name FROM supercategory;'
 	cursor.execute(sql)
 	result = cursor.fetchall()
 	num = len(result)
 
 	# Displaying results
-	print('<table border="5" cellspacing="5">')
-	print('<tr><td>ean</td><td>descr</td><td>name</td><td></td></tr>')
+	print('<table border="3" cellspacing="3">')
+	print('<tr><td>name</td><td></td></tr>')
 	for row in result:
 		print('<tr>')
-		print('<td>', row[0], '</td><td>', row[1], '</td><td>', row[2], '</td><td>', '<a href="descrPoduct.cgi?ean={}">Change designation</a>'.format(row[0]),'</td>')
+		print('<td>', row[0],'</td><td>', '<a href="subCategories.cgi?name={}">List sub-categories</a>'.format(row[0]),'</td>')
 		print('</tr>')
 	print('</table>')
 
