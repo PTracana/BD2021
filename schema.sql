@@ -106,7 +106,7 @@ CREATE TABLE Supplies_prim(
     dia DATE,
     PRIMARY KEY (dia, nif, ean),
     FOREIGN KEY (nif) REFERENCES Supplier(nif),
-    FOREIGN KEY (ean) REFERENCES Product(ean) ON DELETE CASCADE
+    FOREIGN KEY (ean) REFERENCES Product(ean)
 );
 
 CREATE TABLE Supplies_sec(
@@ -114,7 +114,7 @@ CREATE TABLE Supplies_sec(
     ean NUMERIC(13) ,
     PRIMARY KEY (nif, ean),
     FOREIGN KEY (nif) REFERENCES Supplier(nif),
-    FOREIGN KEY (ean) REFERENCES Product(ean) ON DELETE CASCADE
+    FOREIGN KEY (ean) REFERENCES Product(ean)
     -- For a given Product, a supplier cannot be simultaneously a Primary and Secondary Supplier
     -- A product can only have at most 3 Secondary Suppliers
     
@@ -124,7 +124,7 @@ CREATE TABLE simplecategory (
 
     name VARCHAR(80) ,
     PRIMARY KEY(name),
-    FOREIGN KEY(name) REFERENCES Category(name) ON DELETE CASCADE
+    FOREIGN KEY(name) REFERENCES Category(name)
 
 );
 
@@ -132,7 +132,7 @@ CREATE TABLE supercategory(
 
     name VARCHAR(80) ,
     PRIMARY KEY(name),
-    FOREIGN KEY(name) REFERENCES Category(name) ON DELETE CASCADE
+    FOREIGN KEY(name) REFERENCES Category(name)
 
     -- Every superCategory must be present in the consists:of table
 
