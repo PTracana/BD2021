@@ -28,6 +28,13 @@ try:
 
     data = {'ean': int(ean)}
 
+    sql_depend1 =  'DELETE FROM Planogram WHERE ean = %(ean)s'
+    sql_depend2 =  'DELETE FROM Supplies_prim WHERE ean = %(ean)s'
+    sql_depend3 =  'DELETE FROM Supplies_sec WHERE ean = %(ean)s'
+
+    cursor.execute(sql_depend1, data)
+    cursor.execute(sql_depend2, data)
+    cursor.execute(sql_depend3, data)
 
     cursor.execute(sql, data)
     connection.commit()

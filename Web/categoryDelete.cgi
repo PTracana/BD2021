@@ -18,10 +18,26 @@ try:
     connection = psycopg2.connect(login.credentials)
     cursor = connection.cursor()
 
+
+    
+
+
     sql = 'DELETE FROM category WHERE name LIKE %(name)s'
 
     data = {'name': name}
 
+    
+    sql_depend1 = 'DELETE FROM product WHERE name LIKE %(name)s'
+    sql_depend2 = 'DELETE FROM simplecategory WHERE name LIKE %(name)s'
+    sql_depend3 = 'DELETE FROM supercategory WHERE name LIKE %(name)s'
+    sql_depend4 = 'DELETE FROM consist_of WHERE name LIKE %(name)s'
+    sql_depend5 = 'DELETE FROM Displayed_in WHERE name LIKE %(name)s'
+
+    cursor.execute(sql_depend1, data)
+    cursor.execute(sql_depend2, data)
+    cursor.execute(sql_depend3, data)
+    cursor.execute(sql_depend4, data)
+    cursor.execute(sql_depend5, data)
 
     cursor.execute(sql, data)
     connection.commit()
