@@ -57,7 +57,7 @@ CREATE TABLE Product(
     descr VARCHAR(80) NOT NULL,
     name VARCHAR(80),
     PRIMARY KEY (ean),
-    FOREIGN KEY (name) REFERENCES Category(name)
+    FOREIGN KEY (name) REFERENCES Category(name) ON DELETE CASCADE
 
 
     --every product must be in the supplies_prim and supplies_sec table 
@@ -75,7 +75,7 @@ CREATE TABLE Planogram(
     ean NUMERIC(13) ,
     PRIMARY KEY (ean, side, height, nr, NIF),
     FOREIGN KEY (nr, NIF, side, height) REFERENCES Shelf(nr,NIF, side, height),
-    FOREIGN KEY (ean) REFERENCES Product(ean)
+    FOREIGN KEY (ean) REFERENCES Product(ean) ON DELETE CASCADE
     
 );
 
@@ -88,7 +88,7 @@ CREATE TABLE ReplenishEvent (
     NIF INTEGER,
     ean NUMERIC(13) ,
     PRIMARY KEY (ean, side, height, nr, NIF, instant),
-    FOREIGN KEY (ean, side, height, nr, NIF) REFERENCES Planogram(ean, side, height, nr, NIF)
+    FOREIGN KEY (ean, side, height, nr, NIF) REFERENCES Planogram(ean, side, height, nr, NIF) ON DELETE CASCADE
    
 );
 
@@ -106,7 +106,7 @@ CREATE TABLE Supplies_prim(
     dia DATE,
     PRIMARY KEY (dia, nif, ean),
     FOREIGN KEY (nif) REFERENCES Supplier(nif),
-    FOREIGN KEY (ean) REFERENCES Product(ean)
+    FOREIGN KEY (ean) REFERENCES Product(ean) ON DELETE CASCADE
 );
 
 CREATE TABLE Supplies_sec(
@@ -114,7 +114,7 @@ CREATE TABLE Supplies_sec(
     ean NUMERIC(13) ,
     PRIMARY KEY (nif, ean),
     FOREIGN KEY (nif) REFERENCES Supplier(nif),
-    FOREIGN KEY (ean) REFERENCES Product(ean)
+    FOREIGN KEY (ean) REFERENCES Product(ean) ON DELETE CASCADE
     -- For a given Product, a supplier cannot be simultaneously a Primary and Secondary Supplier
     -- A product can only have at most 3 Secondary Suppliers
     
@@ -124,7 +124,7 @@ CREATE TABLE simplecategory (
 
     name VARCHAR(80) ,
     PRIMARY KEY(name),
-    FOREIGN KEY(name) REFERENCES Category(name)
+    FOREIGN KEY(name) REFERENCES Category(name) ON DELETE CASCADE
 
 );
 
@@ -132,7 +132,7 @@ CREATE TABLE supercategory(
 
     name VARCHAR(80) ,
     PRIMARY KEY(name),
-    FOREIGN KEY(name) REFERENCES Category(name)
+    FOREIGN KEY(name) REFERENCES Category(name) ON DELETE CASCADE
 
     -- Every superCategory must be present in the consists:of table
 
@@ -141,8 +141,8 @@ CREATE TABLE supercategory(
 CREATE TABLE consists_of(
     name_super VARCHAR(80),
     name_descendant VARCHAR(80) CONSTRAINT ic1 CHECK ( name_super != name_descendant ),
-    FOREIGN KEY (name_super) REFERENCES supercategory(name),
-    FOREIGN KEY (name_descendant) REFERENCES Category(name)
+    FOREIGN KEY (name_super) REFERENCES supercategory(name) ON DELETE CASCADE,
+    FOREIGN KEY (name_descendant) REFERENCES Category(name) ON DELETE CASCADE
 
     --  Categories cannot cyclically consist of one another
 
@@ -155,7 +155,7 @@ CREATE TABLE Displayed_in(
     nr INTEGER,
     NIF INTEGER,
     PRIMARY KEY(name, side, height, nr, NIF),
-    FOREIGN KEY (name) REFERENCES Category(name),
+    FOREIGN KEY (name) REFERENCES Category(name) ON DELETE CASCADE,
     FOREIGN KEY (side, height, nr, NIF) REFERENCES Shelf(side, height, nr, NIF)
 
 );
